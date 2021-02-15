@@ -1,0 +1,53 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'groovy'
+}
+
+group = 'kr.soulware'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	all {
+		exclude module: 'grails-datastore-simple'
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.grails.org/grails/core" }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	//implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.codehaus.groovy:groovy'
+	compileOnly 'org.projectlombok:lombok'
+	//developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//testImplementation 'org.springframework.security:spring-security-test'
+
+	implementation 'com.google.code.gson:gson:2.8.5'
+
+	implementation "org.grails:gorm-hibernate5-spring-boot:7.0.1.RELEASE"
+	implementation "org.hibernate:hibernate-core"
+	implementation 'org.hibernate:hibernate-ehcache'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+def profiles = 'default'
+bootRun {
+	args = ["--spring.profiles.active=" + profiles]
+}
