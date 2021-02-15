@@ -32,10 +32,7 @@ class Member extends User implements GormEntity<Member> {
 
   Map<String, Object> toData() {
     [id             : id,
-     username       : username,
-     dateCreated    : dateCreated,
      email          : email,
-     nick           : nick,
      first_name     : first_name,
      last_name      : last_name,
      avatar        : avatar

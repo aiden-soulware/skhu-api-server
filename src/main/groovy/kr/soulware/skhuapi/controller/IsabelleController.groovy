@@ -21,6 +21,6 @@ class IsabelleController {
       it.toData()
     } as List
 
-    //[page : 1, data : members]
+    [page : 1, data : members]
   }
 }
