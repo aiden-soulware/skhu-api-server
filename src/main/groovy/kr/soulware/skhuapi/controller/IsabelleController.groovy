@@ -16,9 +16,11 @@ class IsabelleController {
   @GetMapping(value = "/api/users")
   @ResponseBody
   @ResponseStatus(value = HttpStatus.OK)
-  List list() {
-    memberService.getList().collect {
+  def list() {
+    def members = memberService.getList().collect {
       it.toData()
     } as List
+
+    [page : 1, data : members]
   }
 }

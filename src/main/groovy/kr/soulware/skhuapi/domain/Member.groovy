@@ -14,6 +14,7 @@ class Member extends User implements GormEntity<Member> {
   String last_name
   String avatar
   static constraints = {
+    email nullable:true
     nick nullable: true
     first_name nullable:true
     last_name nullable:true
@@ -21,6 +22,7 @@ class Member extends User implements GormEntity<Member> {
   }
 
   static mapping = {
+    email length:100
     nick length: 100
     first_name length:100
     last_name length :100
@@ -30,8 +32,9 @@ class Member extends User implements GormEntity<Member> {
 
   Map<String, Object> toData() {
     [id             : id,
-     username       : email,
+     username       : username,
      dateCreated    : dateCreated,
+     email          : email,
      nick           : nick,
      first_name     : first_name,
      last_name      : last_name,
