@@ -9,21 +9,33 @@ import org.grails.datastore.gorm.GormEntity
 @Entity
 class Member extends User implements GormEntity<Member> {
   String nick
-
+  String email
+  String first_name
+  String last_name
+  String avatar
   static constraints = {
     nick nullable: true
+    first_name nullable:true
+    last_name nullable:true
+    avatar nullable:true
   }
 
   static mapping = {
     nick length: 100
+    first_name length:100
+    last_name length :100
+    avatar length :500
     version false
   }
 
   Map<String, Object> toData() {
     [id             : id,
-     username       : username,
+     username       : email,
      dateCreated    : dateCreated,
      nick           : nick,
+     first_name     : first_name,
+     last_name      : last_name,
+     avatar        : avatar
     ] as Map<String, Object>
   }
 }

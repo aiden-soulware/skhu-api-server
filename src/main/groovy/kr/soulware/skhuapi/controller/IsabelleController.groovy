@@ -13,7 +13,7 @@ class IsabelleController {
   @Resource
   MemberService memberService
 
-  @GetMapping(value = "/isabelle")
+  @GetMapping(value = "/api/users")
   @ResponseBody
   @ResponseStatus(value = HttpStatus.OK)
   List list() {

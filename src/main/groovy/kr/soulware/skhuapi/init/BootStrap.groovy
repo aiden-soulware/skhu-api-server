@@ -20,10 +20,10 @@ class BootStrap {
       adminRole.save()
       Role userRole = new Role(authority: 'ROLE_USER')
       userRole.save()
-      Member temp = new Member(username: "test",password: '12341234', nick:'왼쪽')
+      Member temp = new Member(username: "test",password: '12341234', nick:'왼쪽', "email":"george.bluth@reqres.in","first_name":"George","last_name":"Bluth")
       temp.save()
       new UserRole(user: temp, role: userRole).save()
-      Member temp2 = new Member(username: "test2",password: '12341234', nick:'오른쪽')
+      Member temp2 = new Member(username: "test2",password: '12341234', nick:'오른쪽', "email":"janet.weaver@reqres.in")
       temp2.save()
       new UserRole(user: temp2, role: userRole).save()
     }
