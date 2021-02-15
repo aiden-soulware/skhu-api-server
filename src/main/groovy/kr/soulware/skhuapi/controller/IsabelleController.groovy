@@ -5,7 +5,7 @@ import kr.soulware.skhuapi.service.MemberService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource
-
+@CrossOrigin(origins = "http://localhost:8080")
 @Slf4j
 @RestController
 class IsabelleController {
@@ -21,6 +21,6 @@ class IsabelleController {
       it.toData()
     } as List
 
-    [page : 1, data : members]
+    //[page : 1, data : members]
   }
 }

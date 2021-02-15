@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service
 @Service
 class BootStrap {
 
-
   void init() {
     if (Role.count == 0) {
       Role adminRole = new Role(authority: 'ROLE_ADMIN')
