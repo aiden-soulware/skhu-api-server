@@ -26,6 +26,8 @@ class BootStrap {
       Member temp2 = new Member(username: "test2",password: '12341234', nick:'오른쪽', "email":"janet.weaver@reqres.in")
       temp2.save()
       new UserRole(user: temp2, role: userRole).save()
+
     }
   }
+
 }
