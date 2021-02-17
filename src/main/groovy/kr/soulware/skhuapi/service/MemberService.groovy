@@ -18,4 +18,8 @@ class MemberService {
     //Member.findAll(offset : 1, max : 6) as List
     Member.findAll() as List
   }
+
+  List matchList(Long id) {
+    Member.findAll(id) as List
+  }
 }

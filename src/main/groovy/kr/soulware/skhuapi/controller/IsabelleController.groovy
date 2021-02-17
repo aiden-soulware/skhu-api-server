@@ -23,4 +23,15 @@ class IsabelleController {
 
     [page : 1, data : members]
   }
+
+  @GetMapping(value = "/api/user/{id}")
+  @ResponseBody
+  @ResponseStatus(value = HttpStatus.OK)
+  def matchlist(@PathVariable("id")Long id){
+    def member = memberService.matchList(id).collect {
+      it.toData()
+    } as List
+    [page : 1, data : member]
+  }
+
 }
