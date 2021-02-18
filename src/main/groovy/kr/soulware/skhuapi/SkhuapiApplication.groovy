@@ -16,12 +16,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 class SkhuapiApplication extends SpringBootServletInitializer implements ApplicationRunner {
 
-	@Autowired
-	BootStrap bootStrap
+    @Autowired
+    BootStrap bootStrap
 
-	static void main(String[] args) {
-		SpringApplication.run(SkhuapiApplication, args)
-	}
+    static void main(String[] args) {
+        SpringApplication.run(SkhuapiApplication, args)
+    }
 //	@Bean
 //	WebMvcConfigurer corsConfigurer() {
 //		return new WebMvcConfigurer() {
@@ -33,13 +33,13 @@ class SkhuapiApplication extends SpringBootServletInitializer implements Applica
 //		};
 //	}
 
-	void run(ApplicationArguments args) throws Exception {
-		bootStrap.init()
-	}
+    void run(ApplicationArguments args) throws Exception {
+        bootStrap.init()
+    }
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(SkhuapiApplication.class)
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(SkhuapiApplication.class)
+    }
 
 }

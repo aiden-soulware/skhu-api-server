@@ -12,15 +12,15 @@ import javax.annotation.Resource
 @RestController
 class MemberController {
 
-  @Resource
-  MemberService memberService
+    @Resource
+    MemberService memberService
 
-  @GetMapping(value = "/members")
-  @ResponseBody
-  @ResponseStatus(value = HttpStatus.OK)
-  List list() {
-    memberService.getList().collect {
-      it.toData()
+    @GetMapping(value = "/members")
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    List list() {
+        memberService.getList().collect {
+            it.toData()
+        }
     }
-  }
 }
