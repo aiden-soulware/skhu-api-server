@@ -10,16 +10,16 @@ import org.grails.datastore.gorm.GormEntity
 @Entity
 class Role implements GormEntity<Role>, Serializable {
 
-  private static final long serialVersionUID = 1
+    private static final long serialVersionUID = 1
 
-  String authority
+    String authority
 
-  static constraints = {
-    authority nullable: false, blank: false, unique: true
-  }
+    static constraints = {
+        authority nullable: false, blank: false, unique: true
+    }
 
-  static mapping = {
-    table 'auth_role'
-    cache true
-  }
+    static mapping = {
+        table 'auth_role'
+        cache true
+    }
 }
