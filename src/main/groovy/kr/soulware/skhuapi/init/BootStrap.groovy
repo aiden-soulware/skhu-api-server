@@ -19,6 +19,7 @@ class BootStrap {
       adminRole.save()
       Role userRole = new Role(authority: 'ROLE_USER')
       userRole.save()
+
       Member temp = new Member(username: "1",password: '12341234', nick:'왼쪽',"email":"george.bluth@reqres.in","first_name":"George","last_name":"Bluth","avatar":"https://reqres.in/img/faces/1-image.jpg")
       temp.save()
       new UserRole(user: temp, role: userRole).save()
@@ -55,6 +56,8 @@ class BootStrap {
       Member temp12 = new Member(username: "12",password: '12341234', nick:'오른쪽',"email":"rachel.howell@reqres.in","first_name":"Rachel","last_name":"Howell","avatar":"https://reqres.in/img/faces/12-image.jpg")
       temp12.save()
       new UserRole(user: temp12, role: userRole).save()
+
+
 
     }
   }
