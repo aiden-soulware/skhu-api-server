@@ -1,6 +1,7 @@
 package kr.soulware.skhuapi.controller
 
 import groovy.util.logging.Slf4j
+import kr.soulware.skhuapi.domain.Member
 import kr.soulware.skhuapi.service.MemberService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -24,14 +25,18 @@ class IsabelleController {
     [page : 1, data : members]
   }
 
-  @GetMapping(value = "/api/user/{id}")
+  @GetMapping(value = "/api/users/{id}")
   @ResponseBody
   @ResponseStatus(value = HttpStatus.OK)
-  def matchlist(@PathVariable("id")Long id){
-    def member = memberService.matchList(id).collect {
-      it.toData()
-    } as List
+  def matchlist(@PathVariable("id")long id){
+    def member = memberService.getMember(id).toData()
     [page : 1, data : member]
   }
 
+
+  @PostMapping(value = "api/user")
+  @ResponseStatus(value = HttpStatus.OK)
+  Map userPost(@RequestBody Map data){
+   memberService.createMember(data) as Map
+  }
 }

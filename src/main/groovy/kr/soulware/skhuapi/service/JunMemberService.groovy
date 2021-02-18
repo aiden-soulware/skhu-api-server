@@ -17,10 +17,7 @@ class JunMemberService {
     }
 
     Member getListDeatail(long id) {
-
         Member.get(id) as Member
-
-
     }
     Member SaveListPost(Member member){
         Member createObj = new Member(member)
@@ -29,7 +26,6 @@ class JunMemberService {
 
     Member deleteById(long id) {
         def deleteObj = Member.get(id)
-
         deleteObj.delete()
     }
 
