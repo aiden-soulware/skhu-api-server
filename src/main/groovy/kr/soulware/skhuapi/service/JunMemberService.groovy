@@ -3,7 +3,6 @@ package kr.soulware.skhuapi.service
 import grails.gorm.transactions.Transactional
 import groovy.util.logging.Slf4j
 import kr.soulware.skhuapi.domain.Member
-import kr.soulware.skhuapi.domain.auth.Role
 import kr.soulware.skhuapi.domain.auth.UserRole
 import org.springframework.stereotype.Service
 
