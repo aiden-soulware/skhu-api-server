@@ -30,6 +30,24 @@ class Member extends User implements GormEntity<Member> {
     version false
   }
 
+  void setData(data) {
+    if(data.username) {
+      this.username = data.username
+    }
+    if(data.password) {
+      this.password = data.password
+    }
+    if(data.email) {
+      this.email = data.email
+    }
+    if(data.first_name) {
+      this.first_name = data.first_name
+    }
+    if(data.last_name) {
+      this.last_name = data.email
+    }
+  }
+
   Map<String, Object> toData() {
     [id             : id,
      email          : email,

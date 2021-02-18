@@ -19,7 +19,6 @@ class BootStrap {
       adminRole.save()
       Role userRole = new Role(authority: 'ROLE_USER')
       userRole.save()
-
       Member temp = new Member(username: "1",password: '12341234', nick:'왼쪽',"email":"george.bluth@reqres.in","first_name":"George","last_name":"Bluth","avatar":"https://reqres.in/img/faces/1-image.jpg")
       temp.save()
       new UserRole(user: temp, role: userRole).save()
