@@ -27,10 +27,27 @@ class MemberService {
   }
 
   Long createMember(Map data) {
-    //Member.get() as Member
-    log.info("createMember {}", data)
-    Member member = new Member(data)
-    member.save()
+    log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!createMember {}", data)
+
+      Member member = new Member()
+      member.setData(data)
+
+if (member.validate()) {
+        try {
+          member.save()
+        } catch(e) {
+          log.error(e.message)
+          throw new RuntimeException(e.message)
+        }
+      } else {
+        throw new RuntimeException(member.errors.allErrors.toString())
+      }
+      member.save()
+    return member.id
+  }
+  Member deleteMember(long id) {
+    def deleteObj = Member.get(id)
+    deleteObj.delete()
   }
 
 }

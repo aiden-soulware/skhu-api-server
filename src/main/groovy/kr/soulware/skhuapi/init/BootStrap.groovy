@@ -56,6 +56,8 @@ class BootStrap {
       temp12.save()
       new UserRole(user: temp12, role: userRole).save()
 
+
+
     }
   }
 
