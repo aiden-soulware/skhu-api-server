@@ -8,34 +8,45 @@ import org.grails.datastore.gorm.GormEntity
 @ToString(includeNames = true, includePackage = false, includeSuper = true, includes = ['nick'])
 @Entity
 class Member extends User implements GormEntity<Member> {
-  String nick
-  String email
-  String first_name
-  String last_name
-  String avatar
-  static constraints = {
-    email nullable:true
-    nick nullable: true
-    first_name nullable:true
-    last_name nullable:true
-    avatar nullable:true
-  }
+    String nick
+    String email
+    String first_name
+    String last_name
+    String avatar
+    static constraints = {
+        email nullable: true
+        nick nullable: true
+        first_name nullable: true
+        last_name nullable: true
+        avatar nullable: true
+    }
 
-  static mapping = {
-    email length:100
-    nick length: 100
-    first_name length:100
-    last_name length :100
-    avatar length :500
-    version false
-  }
+    static mapping = {
+        email length: 100
+        nick length: 100
+        first_name length: 100
+        last_name length: 100
+        avatar length: 500
+        version false
+    }
 
-  Map<String, Object> toData() {
-    [id             : id,
-     email          : email,
-     first_name     : first_name,
-     last_name      : last_name,
-     avatar        : avatar
-    ] as Map<String, Object>
-  }
+    Map<String, Object> setData(data) {
+        // super.setData(data)
+        if (data.username) {
+            username = data.username
+            email = data.email
+            first_name = data.first_name
+            last_name = data.last_name
+            avatar = data.avatar
+        }
+    }
+
+    Map<String, Object> toData() {
+        [id        : id,
+         email     : email,
+         first_name: first_name,
+         last_name : last_name,
+         avatar    : avatar
+        ] as Map<String, Object>
+    }
 }
