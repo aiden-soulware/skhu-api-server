@@ -30,4 +30,10 @@ class SkhuapiApplicationTests {
     }
 
 
+    @Test
+    void valindationCheckTest(){
+
+    }
+
+
 }

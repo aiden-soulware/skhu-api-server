@@ -35,6 +35,13 @@ class JunController {
         junMemberService.getListDeatail(id).toData() as Map
 
     }
+//    @ResponseBody
+//    @ResponseStatus(value = HttpStatus.OK)
+//    @RequestMapping(method = RequestMethod.GET)
+//    boolean validationsCheck(@RequestBody Member member) {
+//        junMemberService.validationsCheck(member)
+//
+//    }
 
 
     @ResponseStatus(value = HttpStatus.OK)

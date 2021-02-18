@@ -69,13 +69,16 @@ class JunMemberService {
         obj.first_name = data.first_name
         obj.last_name = data.last_name
         obj.avatar = data.avatar
-
 //        obj.setData(data)
-
         //obj = member
         obj.save()
 
     }
+//    boolean validationsCheck(data){
+//        if(Member.findAllByUsername(data.username)){
+//
+//        }
+//    }
 
 
 }
