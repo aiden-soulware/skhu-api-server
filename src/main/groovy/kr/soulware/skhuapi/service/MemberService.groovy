@@ -18,6 +18,19 @@ class MemberService {
     //def total_pages = total/max
     //Member.findAll(offset : 1, max : 6) as List
 
+
     Member.findAll() as List
   }
+
+  Member getMember(long id) {
+    Member.get(id) as Member
+  }
+
+  Long createMember(Map data) {
+    //Member.get() as Member
+    log.info("createMember {}", data)
+    Member member = new Member(data)
+    member.save()
+  }
+
 }

@@ -51,11 +51,11 @@ class JunController {
         junMemberService.deleteById(id)
         return true;
     }
-    @PutMapping("/{id}")
-//    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    boolean update(@PathVariable("id") long id ,@RequestBody Member member) {
-        log.info("zzz"+id)
-        junMemberService.updateList(member,id)
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    boolean update(@PathVariable("id") long id, @RequestBody Member member) {
+        log.info("zzz" + id)
+        junMemberService.updateList(member, id)
         return true;
     }
 

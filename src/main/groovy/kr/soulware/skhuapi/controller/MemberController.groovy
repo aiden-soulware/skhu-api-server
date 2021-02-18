@@ -1,6 +1,7 @@
 package kr.soulware.skhuapi.controller
 
 import groovy.util.logging.Slf4j
+import kr.soulware.skhuapi.domain.Member
 import kr.soulware.skhuapi.service.MemberService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -20,6 +21,6 @@ class MemberController {
   List list() {
     memberService.getList().collect {
       it.toData()
-    } as List
+    }
   }
 }
