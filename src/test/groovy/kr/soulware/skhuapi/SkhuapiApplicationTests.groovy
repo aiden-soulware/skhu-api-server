@@ -23,7 +23,7 @@ class SkhuapiApplicationTests {
                     password  : "w",
                     username  : "ki"]
 
-        Long id = memberService.createMember(data)
+        Long id = memberService.editUser(data, id)
         log.info("Long {}@@@@@@@@@@@", id)
         def member = memberService.getMember(id)
         log.info("id {}@@@@@@@@@@@", member)

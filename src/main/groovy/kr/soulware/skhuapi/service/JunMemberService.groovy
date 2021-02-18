@@ -23,9 +23,7 @@ class JunMemberService {
     }
     //detail
     Member getListDeatail(long id) {
-
         Member.get(id) as Member
-
 
     }
     // list create
