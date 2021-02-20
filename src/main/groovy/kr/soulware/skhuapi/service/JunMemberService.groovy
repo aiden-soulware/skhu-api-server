@@ -74,11 +74,15 @@ class JunMemberService {
         obj.save()
 
     }
-//    boolean validationsCheck(data){
-//        if(Member.findAllByUsername(data.username)){
-//
-//        }
-//    }
+
+    String validationsCheck(String username) {
+        def nameQuery = Member.findAllByUsername(username)
+        if (nameQuery.isEmpty()) {
+            return "없음"
+        }
+        return "있음"
+
+    }
 
 
 }
