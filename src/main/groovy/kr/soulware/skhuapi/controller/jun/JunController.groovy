@@ -21,7 +21,7 @@ class JunController {
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
     List list(Map params) {
-        junMemberService.getList().collect {
+        junMemberService.getList(params).collect {
 
             it.toData()
         } as List
@@ -40,8 +40,9 @@ class JunController {
     @RequestMapping(method = RequestMethod.GET,path = "/vali/{username}")
     boolean validationsCheck(@PathVariable("username") String username) {
         log.info(username)
-       String str =  junMemberService.validationsCheck(username)
-        log.info(str)
+       boolean  check =  junMemberService.validationsCheck(username)
+
+       return check
 
     }
 
