@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service
 class JunMemberService {
     //All Map params 추가 해서 사용
     List getList(Map params) {
+        log.info( params.page)
         Integer offset = params.offset
+        log.info("offset : {}", offset)
         Integer max = params.max
         def total = Member.count()
         def total_pages = total/max

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource
 
 @Slf4j
-@CrossOrigin(origins = "http://localhost:8080")
+//@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/jun/users")
 class JunController {
@@ -20,8 +20,8 @@ class JunController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
-    List list(Map params) {
-        junMemberService.getList(params).collect {
+    List list(@RequestParam(value="page", defaultValue = "1") Integer pageNum) {
+        junMemberService.getList(pageNum).collect {
 
             it.toData()
         } as List
