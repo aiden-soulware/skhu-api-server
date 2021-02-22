@@ -45,7 +45,10 @@ class Member extends User implements GormEntity<Member> {
             this.first_name = data.first_name
         }
         if (data.last_name) {
-            this.last_name = data.email
+            this.last_name = data.last_name
+        }
+        if(data.avatar){
+            this.avatar = data.avatar
         }
     }
 

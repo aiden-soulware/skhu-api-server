@@ -35,7 +35,7 @@ class IsabelleController {
     }
 
 
-    @PostMapping(value = "api/user")
+    @PostMapping(value = "/api/users")
     @ResponseStatus(value = HttpStatus.OK)
     Long userPost(@RequestBody Map data) {
         /*  if(!data.containsKey('id')) {
@@ -47,10 +47,27 @@ class IsabelleController {
     }
 
     @DeleteMapping("/api/users/{id}")
-    Long delete(@PathVariable("id") long id) {
-        memberService.deleteMember(id)
+    @ResponseStatus(value = HttpStatus.OK)
+    Void delete(@PathVariable("id") long id) {
         log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@createMember {}", id)
+        Long deleteId = memberService.deleteMember(id)
+        log.info("~~~~~~~~~~~deleteId {}", deleteId)
     }
-
+    @PutMapping("/api/users/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    Long edit(@PathVariable("id") Long id, @RequestBody Map data) {
+        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@editUser {}, {}", id, data)
+        Long updateId = memberService.editUser(id, data)
+        return updateId
+    }
+    /*
+    @PostMapping(value = "/api/users/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    Long loginUser(@PathVariable("id") long id) {
+        Long loginId = memberService.loginMember(id)
+        log.info("createdId {}", loginId)
+        return loginId
+    }
+     */
 
 }
