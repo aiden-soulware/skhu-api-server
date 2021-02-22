@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource
 
 @Slf4j
-//@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/jun/users")
 class JunController {
@@ -20,11 +20,10 @@ class JunController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
-    List list(@RequestParam(value="page", defaultValue = "1") Integer pageNum) {
-        junMemberService.getList(pageNum).collect {
+    Map list(@RequestParam(value = "page", defaultValue = "1") Integer pageNum) {
+        junMemberService.getList(pageNum)
 
-            it.toData()
-        } as List
+
     }
 
 
@@ -35,14 +34,15 @@ class JunController {
         junMemberService.getListDeatail(id).toData() as Map
 
     }
+
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.GET,path = "/vali/{username}")
+    @RequestMapping(method = RequestMethod.GET, path = "/vali/{username}")
     boolean validationsCheck(@PathVariable("username") String username) {
         log.info(username)
-       boolean  check =  junMemberService.validationsCheck(username)
+        boolean check = junMemberService.validationsCheck(username)
 
-       return check
+        return check
 
     }
 

@@ -12,26 +12,24 @@ import org.springframework.stereotype.Service
 //create error
 @Service
 class JunMemberService {
-    //All Map params 추가 해서 사용
-    List getList(Map params) {
-        log.info( params.page)
-        Integer offset = params.offset
-        log.info("offset : {}", offset)
-        Integer max = params.max
-        def total = Member.count()
-        def total_pages = total/max
-        Member.findAll(offset : 1, max : 6) as List
-        //params.offset
-        //params.max
-        //def params = [offset : 0, max:6, keyworkd:'test']
 
-//        Member.findAll() as List
+//All Map params 추가 해서 사용
+    Map getList(Integer pageNum) {
+        Integer max = 6
+        Integer offset = (pageNum * max) - max
+        def total = Member.count()
+        Integer total_pages = Math.ceil(total / max)
+        def listObj = Member.findAll(offset: offset, max: max).collect().collect {
+            it.toData()
+        } as List
+        log.info("totalpage : {}", total_pages)
+        [data: listObj, total_pages: total_pages] as Map
+
     }
     //detail
     Member getListDeatail(long id) {
 
         Member.get(id) as Member
-
 
     }
     // list create
@@ -83,12 +81,12 @@ class JunMemberService {
 
     boolean validationsCheck(String username) {
         Member.countByUsername(username) == 0
-       // log.info("username" + username)
+        // log.info("username" + username)
 //        def nameQuery = Member.findAllByUsername(username)
 //        log.info(nameQuery.username + "이름")
         // select count(*) from user where username = ?
-       // def count = Member.countByUsername(username)
-      //  log.info("count : {}", count)
+        // def count = Member.countByUsername(username)
+        //  log.info("count : {}", count)
         //if (Member.findAllByUsername(username)) {
         //!(count > 0)
         /*if(count > 0) {
@@ -97,7 +95,7 @@ class JunMemberService {
         } else {
             return true
         }*/
-       // return true
+        // return true
 
     }
 
