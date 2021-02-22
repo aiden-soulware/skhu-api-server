@@ -3,7 +3,6 @@ package kr.soulware.skhuapi.service
 import grails.gorm.transactions.Transactional
 import groovy.util.logging.Slf4j
 import kr.soulware.skhuapi.domain.Member
-import kr.soulware.skhuapi.domain.auth.UserRole
 import org.springframework.stereotype.Service
 
 @Slf4j
@@ -40,45 +39,13 @@ class MemberService {
         } else {
             throw new RuntimeException(member.errors.allErrors.toString())
         }
-        //member.save()
-        return member.id
-    }
-
-    Long deleteMember(long id) {
-        def roles = UserRole.findAllByUser(Member.get(id))
-        roles.each {
-            it.delete()
-        }
-        Member deleteObj = Member.get(id)
-        deleteObj.delete()
-        return deleteObj.id
-        }
-
-    Long editUser(Map data,long id) {
-        Member member = new Member()
-        member.get(id)
-        log.info("####################{}deitMember",member.get(id))
-        member.setData(data)
         member.save()
         return member.id
     }
-    /*Member updateList(data, id) {
 
-        def obj = Member.get(id)
-        obj.username = data.username
-        obj.email = data.email
-        obj.first_name = data.first_name
-        obj.last_name = data.last_name
-        obj.avatar = data.avatar
-
-//        obj.setData(data)
-
-        //obj = member
-        obj.save()
-
-    }*/
-
-
+    Member deleteMember(long id) {
+        def deleteObj = Member.get(id)
+        deleteObj.delete()
+    }
 
 }
-
