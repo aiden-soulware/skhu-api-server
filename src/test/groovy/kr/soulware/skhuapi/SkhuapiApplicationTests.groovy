@@ -1,6 +1,8 @@
 package kr.soulware.skhuapi
 
 import groovy.util.logging.Slf4j
+
+import kr.soulware.skhuapi.service.JunMemberService
 import kr.soulware.skhuapi.service.MemberService
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -13,7 +15,7 @@ class SkhuapiApplicationTests {
 
     @Resource
     MemberService memberService
-
+    JunMemberService junMemberService
     @Test
     void contextLoads() {
         def data = [email     : "kim41900@naver.com",
@@ -31,9 +33,11 @@ class SkhuapiApplicationTests {
 
 
     @Test
-    void valindationCheckTest(){
-
-    }
+//    void valindationCheckTest(){
+//         String data = "hj"
+//       M= Member.findByUsername(data)
+//
+//    }
 
 
 }

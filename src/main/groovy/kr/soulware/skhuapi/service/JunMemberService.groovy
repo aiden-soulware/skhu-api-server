@@ -14,16 +14,22 @@ import org.springframework.stereotype.Service
 class JunMemberService {
     //All Map params 추가 해서 사용
     List getList(Map params) {
-
+        Integer offset = params.offset
+        Integer max = params.max
+        def total = Member.count()
+        def total_pages = total/max
+        Member.findAll(offset : 1, max : 6) as List
         //params.offset
         //params.max
         //def params = [offset : 0, max:6, keyworkd:'test']
 
-        Member.findAll() as List
+//        Member.findAll() as List
     }
     //detail
     Member getListDeatail(long id) {
+
         Member.get(id) as Member
+
 
     }
     // list create
@@ -67,11 +73,29 @@ class JunMemberService {
         obj.first_name = data.first_name
         obj.last_name = data.last_name
         obj.avatar = data.avatar
-
 //        obj.setData(data)
-
         //obj = member
         obj.save()
+
+    }
+
+    boolean validationsCheck(String username) {
+        Member.countByUsername(username) == 0
+       // log.info("username" + username)
+//        def nameQuery = Member.findAllByUsername(username)
+//        log.info(nameQuery.username + "이름")
+        // select count(*) from user where username = ?
+       // def count = Member.countByUsername(username)
+      //  log.info("count : {}", count)
+        //if (Member.findAllByUsername(username)) {
+        //!(count > 0)
+        /*if(count > 0) {
+            log.info("문자열 있음")
+            return false
+        } else {
+            return true
+        }*/
+       // return true
 
     }
 
