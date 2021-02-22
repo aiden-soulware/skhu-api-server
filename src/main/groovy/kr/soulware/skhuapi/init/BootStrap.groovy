@@ -22,7 +22,7 @@ class BootStrap {
             Member temp = new Member(username: "a", password: '12341234', nick: '왼쪽', "email": "george.bluth@reqres.in", "first_name": "George", "last_name": "Bluth", "avatar": "https://reqres.in/img/faces/1-image.jpg")
             temp.save()
             new UserRole(user: temp, role: userRole).save()
-            /*Member temp2 = new Member(username: "b", password: '12341234', nick: '오른쪽', "email": "janet.weaver@reqres.in", "first_name": "Janet", "last_name": "Weaver", "avatar": "https://reqres.in/img/faces/2-image.jpg")
+            Member temp2 = new Member(username: "b", password: '12341234', nick: '오른쪽', "email": "janet.weaver@reqres.in", "first_name": "Janet", "last_name": "Weaver", "avatar": "https://reqres.in/img/faces/2-image.jpg")
             temp2.save()
             new UserRole(user: temp2, role: userRole).save()
             Member temp3 = new Member(username: "3", password: '12341234', nick: '오른쪽', "email": "emma.wong@reqres.in", "first_name": "Emma", "last_name": "Wong", "avatar": "https://reqres.in/img/faces/3-image.jpg")
@@ -54,9 +54,7 @@ class BootStrap {
             new UserRole(user: temp11, role: userRole).save()
             Member temp12 = new Member(username: "12", password: '12341234', nick: '오른쪽', "email": "rachel.howell@reqres.in", "first_name": "Rachel", "last_name": "Howell", "avatar": "https://reqres.in/img/faces/12-image.jpg")
             temp12.save()
-            new UserRole(user: temp12, role: userRole).save()*/
-
-
+            new UserRole(user: temp12, role: userRole).save()
         }
     }
 
