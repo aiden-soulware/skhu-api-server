@@ -52,10 +52,10 @@ class SkhuapiApplicationTests {
     }
 
 
-    @Test
-//    void valindationCheckTest(){
-//         String data = "hj"
-//       M= Member.findByUsername(data)
+//    @Test
+//    void pagingTests(){
+//        Long num = 2
+//        junMemberService.getList(num)
 //
 //    }
 
