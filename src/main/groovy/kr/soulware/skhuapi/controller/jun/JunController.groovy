@@ -20,8 +20,12 @@ class JunController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
-    Map list(@RequestParam(value = "page", defaultValue = "1") Integer pageNum) {
-        junMemberService.getList(pageNum)
+    Map list(@RequestParam(value = "page", defaultValue = "1") Integer pageNum,
+             @RequestParam(value = "max", defaultValue = "6") Integer max,
+             @RequestParam Map params) {
+        //page = page
+
+        junMemberService.getList(params)
 
 
     }
