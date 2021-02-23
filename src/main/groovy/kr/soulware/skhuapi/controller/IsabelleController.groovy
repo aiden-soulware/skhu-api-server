@@ -35,6 +35,14 @@ class IsabelleController {
     }
 
 
+    @GetMapping(value = "/api/unique/{username}")
+    @ResponseStatus(value = HttpStatus.OK)
+    boolean vuelidateMember(@PathVariable("username") String username) {
+        log.info(username)
+        boolean check = memberService.isUnique(username)
+        return check
+    }
+
     @PostMapping(value = "/api/users")
     @ResponseStatus(value = HttpStatus.OK)
     Long userPost(@RequestBody Map data) {
