@@ -6,6 +6,9 @@ import kr.soulware.skhuapi.domain.Member
 import kr.soulware.skhuapi.domain.auth.UserRole
 import org.springframework.stereotype.Service
 
+import static javax.management.Query.or
+import static org.hibernate.criterion.Restrictions.like
+
 @Slf4j
 @Transactional
 
@@ -14,15 +17,46 @@ import org.springframework.stereotype.Service
 class JunMemberService {
 
 //All Map params 추가 해서 사용
-    Map getList(Integer pageNum) {
-        Integer max = 6
+//    Map getList(Map params) {
+//        Integer pageNum = params.page as Integer
+//        Integer max = params.max as Integer
+//        String keyword = params.keyword as String
+//        Integer offset = (pageNum * max) - max
+//        def total = Member.count()
+//        Integer total_pages = Math.ceil(total / max) as Integer
+//        def listObj = Member.findAll(offset: offset, max: max).collect {
+//            it.toData()
+//        } as List
+//        log.info("size:{}", listObj.size())
+//        // where
+//        // creteria
+//
+//        [data: listObj, total_pages: total_pages] as Map
+//
+//    }
+    Map getList(Map params) {
+        Integer pageNum = params.page as Integer
+        Integer max = params.max as Integer
+        String keyword = params.keyword as String
         Integer offset = (pageNum * max) - max
         def total = Member.count()
-        Integer total_pages = Math.ceil(total / max)
-        def listObj = Member.findAll(offset: offset, max: max).collect().collect {
-            it.toData()
-        } as List
-        log.info("totalpage : {}", total_pages)
+        Integer total_pages = Math.ceil(total / max) as Integer
+//        def listObj = Member.findAll(offset: offset, max: max).collect {
+//            it.toData()
+//        } as List
+
+        def listObj = Member.where {
+            first_name in where { id < 18 }.first_name
+        }as List
+
+
+
+        log.info("listObj:{}", listObj)
+
+
+        // where
+        // creteria
+
         [data: listObj, total_pages: total_pages] as Map
 
     }
