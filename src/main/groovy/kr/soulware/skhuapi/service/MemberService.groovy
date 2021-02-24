@@ -11,14 +11,15 @@ import kr.soulware.skhuapi.domain.auth.UserRole
 @Service
 class MemberService {
 
-    List getList(Map params) {
-        Integer offset = params.offset
+    Map getList(Map params) {
+        Integer page = params.page
         Integer max = params.max
+        Integer offset = (page - 1) * max
         def total = Member.count()
-        def total_pages = total/max
-        Member.findAll(offset : 1, max : 6) as List
+        def total_pages = total/max as Integer
+        def list = Member.list(offset : offset, max : max)
+        [data:list.collect{it.toData()}, total_pages:total_pages]
     }
-
     Member getMember(long id) {
         Member.get(id) as Member
     }
