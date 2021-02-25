@@ -18,12 +18,12 @@ class IsabelleController {
     @GetMapping(value = "/api/users")
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
-    def list() {
-        def members = memberService.getList().collect {
-            it.toData()
-        } as List
-
-        [page: 1, data: members]
+    def list(@RequestParam(value="page", defaultValue = "1") Integer page,
+             @RequestParam(value="max", defaultValue = "6") Integer max  ) {
+        def listData = memberService.getList([page:page, max:max])
+        def result = [page: page]
+        result.putAll(listData)
+        result
     }
 
     @GetMapping(value = "/api/users/{id}")
@@ -31,9 +31,17 @@ class IsabelleController {
     @ResponseStatus(value = HttpStatus.OK)
     def matchlist(@PathVariable("id") long id) {
         def member = memberService.getMember(id).toData()
-        [page: 1, data: member]
+        [page: id, data: member]
     }
 
+
+    @GetMapping(value = "/api/unique/{username}")
+    @ResponseStatus(value = HttpStatus.OK)
+    boolean vuelidateMember(@PathVariable("username") String username) {
+        log.info(username)
+        boolean check = memberService.isUnique(username)
+        return check
+    }
 
     @PostMapping(value = "/api/users")
     @ResponseStatus(value = HttpStatus.OK)

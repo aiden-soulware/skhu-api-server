@@ -4,21 +4,22 @@ import grails.gorm.transactions.Transactional
 import groovy.util.logging.Slf4j
 import kr.soulware.skhuapi.domain.Member
 import org.springframework.stereotype.Service
+import kr.soulware.skhuapi.domain.auth.UserRole
 
 @Slf4j
 @Transactional
 @Service
 class MemberService {
 
-    List getList(Map params) {
-        //Integer offset = params.offset
-        //Integer max = params.max
-        //def total = Member.count()
-        //def total_pages = total/max
-        //Member.findAll(offset : 1, max : 6) as List
-        Member.findAll() as List
+    Map getList(Map params) {
+        Integer page = params.page
+        Integer max = params.max
+        Integer offset = (page - 1) * max
+        def total = Member.count()
+        def total_pages = total/max as Integer
+        def list = Member.list(offset : offset, max : max)
+        [data:list.collect{it.toData()}, total_pages:total_pages]
     }
-
     Member getMember(long id) {
         Member.get(id) as Member
     }
@@ -44,8 +45,27 @@ class MemberService {
     }
 
     Member deleteMember(long id) {
-        def deleteObj = Member.get(id)
+        def roles = UserRole.findAllByUser(Member.get(id))
+        roles.each {
+            it.delete()
+        }
+        Member deleteObj = Member.get(id)
         deleteObj.delete()
     }
+
+    Long editUser(Map data, long id) {
+        Member member = new Member()
+        member.get(id)
+        log.info("####################{}deitMember", member.get(id))
+        member.setData(data)
+        member.save()
+        return member.id
+    }
+
+    boolean isUnique(String username) {
+        int count = Member.countByUsername(username)
+        return count == 0
+    }
+
 
 }
