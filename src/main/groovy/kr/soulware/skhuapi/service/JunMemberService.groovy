@@ -1,13 +1,14 @@
 package kr.soulware.skhuapi.service
 
+import grails.gorm.PagedResultList
 import grails.gorm.transactions.Transactional
 import groovy.util.logging.Slf4j
 import kr.soulware.skhuapi.domain.Member
 import kr.soulware.skhuapi.domain.auth.UserRole
 import org.springframework.stereotype.Service
 
-import static javax.management.Query.or
-import static org.hibernate.criterion.Restrictions.like
+//import static javax.management.Query.or
+//import static org.hibernate.criterion.Restrictions.like
 
 @Slf4j
 @Transactional
@@ -36,28 +37,28 @@ class JunMemberService {
 //    }
     Map getList(Map params) {
         Integer pageNum = params.page as Integer
-        Integer max = params.max as Integer
+        Integer max = 4
         String keyword = params.keyword as String
         Integer offset = (pageNum * max) - max
-        def total = Member.count()
+        log.info("params:{}", params)
+        def listObj =Member.createCriteria().list(offset: offset, max: max) {
+           if(keyword) {
+//               like("email", "%${keyword}%")
+//               like("email", "%${keyword}%")
+               like("first_name", "%${keyword}%")
+//               like("last_name", "%${keyword}%")
+
+           }else {
+
+           }
+        } as  PagedResultList
+        def total = listObj.totalCount
+        log.info("total:{}",total)
         Integer total_pages = Math.ceil(total / max) as Integer
-//        def listObj = Member.findAll(offset: offset, max: max).collect {
-//            it.toData()
-//        } as List
-
-        def listObj = Member.where {
-            first_name in where { id < 18 }.first_name
-        }as List
-
-
-
-        log.info("listObj:{}", listObj)
-
-
         // where
         // creteria
 
-        [data: listObj, total_pages: total_pages] as Map
+        [data: listObj.collect{it.toData()}, total_pages:total_pages] as Map
 
     }
     //detail

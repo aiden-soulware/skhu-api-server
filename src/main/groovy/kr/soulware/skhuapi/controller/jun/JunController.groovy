@@ -20,11 +20,14 @@ class JunController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
-    Map list(@RequestParam(value = "page", defaultValue = "1") Integer pageNum,
-             @RequestParam(value = "max", defaultValue = "6") Integer max,
-             @RequestParam Map params) {
+    Map list(@RequestParam Map params
+             ,@RequestParam(value = "page", required = false,defaultValue = "1") Integer pageNum
+             ,@RequestParam(value = "keyword", required = false,defaultValue = "") String keyword
+             ) {
         //page = page
-
+        log.info("controller params : {}",params)
+        log.info("controller params : {}",params.page)
+        log.info("controller params : {}",params.keyword)
         junMemberService.getList(params)
 
 
