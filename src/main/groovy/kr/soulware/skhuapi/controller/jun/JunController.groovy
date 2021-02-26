@@ -21,14 +21,32 @@ class JunController {
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
     Map list(@RequestParam Map params
-             ,@RequestParam(value = "page", required = false,defaultValue = "1") Integer pageNum
-             ,@RequestParam(value = "keyword", required = false,defaultValue = "") String keyword
-             ) {
+             , @RequestParam(value = "page", required = false, defaultValue = "1") Integer pageNum
+             , @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword
+    ) {
         //page = page
-        log.info("controller params : {}",params)
-        log.info("controller params : {}",params.page)
-        log.info("controller params : {}",params.keyword)
+        log.info("controller params : {}", params)
+        log.info("controller params : {}", params.page)
+        log.info("controller params : {}", params.keyword)
         junMemberService.getList(params)
+
+
+    }
+
+
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.GET, path = "/infinite")
+    Map infiniteScroll(@RequestParam Map params
+                       , @RequestParam(value = "limit") Integer limit
+                       , @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword
+    ) {
+        //page = page
+        log.info("controller params : {}", params)
+        log.info("controller params : {}", params.limit)
+        log.info("controller params : {}", params.keyword)
+        junMemberService.getListInfinite(params)
+
 
 
     }

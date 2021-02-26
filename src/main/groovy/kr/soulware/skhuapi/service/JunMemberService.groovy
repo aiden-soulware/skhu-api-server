@@ -17,50 +17,43 @@ import org.springframework.stereotype.Service
 @Service
 class JunMemberService {
 
-//All Map params 추가 해서 사용
-//    Map getList(Map params) {
-//        Integer pageNum = params.page as Integer
-//        Integer max = params.max as Integer
-//        String keyword = params.keyword as String
-//        Integer offset = (pageNum * max) - max
-//        def total = Member.count()
-//        Integer total_pages = Math.ceil(total / max) as Integer
-//        def listObj = Member.findAll(offset: offset, max: max).collect {
-//            it.toData()
-//        } as List
-//        log.info("size:{}", listObj.size())
-//        // where
-//        // creteria
-//
-//        [data: listObj, total_pages: total_pages] as Map
-//
-//    }
     Map getList(Map params) {
         Integer pageNum = params.page as Integer
-        Integer max = 4
+        Integer max = 3
         String keyword = params.keyword as String
+
         Integer offset = (pageNum * max) - max
         log.info("params:{}", params)
-        def listObj =Member.createCriteria().list(offset: offset, max: max) {
-           if(keyword) {
-//               like("email", "%${keyword}%")
-//               like("email", "%${keyword}%")
-               like("first_name", "%${keyword}%")
-//               like("last_name", "%${keyword}%")
+        def listObj = Member.createCriteria().list(offset: offset, max: max) {
+            if (keyword) {
+                like("first_name", "%${keyword}%")
+            } else {
 
-           }else {
-
-           }
-        } as  PagedResultList
+            }
+        } as PagedResultList
         def total = listObj.totalCount
-        log.info("total:{}",total)
+        log.info("total:{}", total)
         Integer total_pages = Math.ceil(total / max) as Integer
         // where
         // creteria
 
-        [data: listObj.collect{it.toData()}, total_pages:total_pages] as Map
+        [data: listObj.collect { it.toData() }, total_pages: total_pages] as Map
 
     }
+
+    Map getListInfinite(Map params) {
+        Integer limit = params.limit as Integer
+        String keyword = params.keyword as String
+        log.info("params:{}", params)
+        def listObj = Member.createCriteria().list(offset: limit, max: 4) {
+            if (keyword) {
+                like("first_name", "%${keyword}%")
+            } else {
+            }
+        } as PagedResultList
+        [data: listObj.collect { it.toData() }] as Map
+    }
+
     //detail
     Member getListDeatail(long id) {
 
@@ -136,3 +129,23 @@ class JunMemberService {
 
 
 }
+
+
+//All Map params 추가 해서 사용
+//    Map getList(Map params) {
+//        Integer pageNum = params.page as Integer
+//        Integer max = params.max as Integer
+//        String keyword = params.keyword as String
+//        Integer offset = (pageNum * max) - max
+//        def total = Member.count()
+//        Integer total_pages = Math.ceil(total / max) as Integer
+//        def listObj = Member.findAll(offset: offset, max: max).collect {
+//            it.toData()
+//        } as List
+//        log.info("size:{}", listObj.size())
+//        // where
+//        // creteria
+//
+//        [data: listObj, total_pages: total_pages] as Map
+//
+//    }
